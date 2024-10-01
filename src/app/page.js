@@ -62,7 +62,7 @@ export default function Home() {
       <div className="max-w-screen-lg mx-auto mt-10">
         <div className="flex rounded-full border-neutral-800 border bg-neutral-800 text-white px-20 py-2 rounded-md">
           <div className=" items-center">
-            <h1 className="text-3xl font-bold">internhut <span className="text-blue-500 text-sm">BETA</span></h1>
+            <h1 className="text-3xl font-bold">internhunt <span className="text-blue-500 text-sm">BETA</span></h1>
           </div>
           <div className="ml-auto flex items-center text-sm hidden">
             <button className="bg-blue-600 text-white px-4 py-1 rounded-full">
