@@ -7,3 +7,24 @@ body {
   color: #fff;
   font-family: 'Poppins', sans-serif; /* Changed from 'Inter' to 'Poppins' */
 }
+
+.truncate-container {
+  overflow: hidden;
+  max-width: 200px; /* Adjust as needed */
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hover\:marquee:hover {
+  display: inline-block;
+  animation: marquee 5s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
