@@ -10,6 +10,7 @@ export default function Home() {
   const [listings, setListings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
   const fetchListings = () => {
     fetch('https://raw.githubusercontent.com/SimplifyJobs/Summer2025-Internships/refs/heads/dev/.github/scripts/listings.json')
@@ -57,6 +58,14 @@ export default function Home() {
     }
   };
 
+  const handleLoginClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
       <div className="max-w-screen-lg mx-auto mt-10">
@@ -64,8 +73,11 @@ export default function Home() {
           <div className=" items-center">
             <h1 className="text-3xl font-bold">internhunt <span className="text-blue-500 text-sm">BETA</span></h1>
           </div>
-          <div className="ml-auto flex items-center text-sm hidden">
-            <button className="bg-blue-600 text-white px-4 py-1 rounded-full">
+          <div className="ml-auto flex items-center text-sm ">
+            <button onClick={handleLoginClick} className="bg-blue-600 text-white px-4 py-1  flex  items-center rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
               Login
             </button>
             <div className='w-full'></div>
@@ -74,6 +86,39 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        {/* Login Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50 bg-neutral-900 bg-opacity-50">
+                        <div className="bg-neutral-800 border border-neutral-700 p-6 rounded-md shadow-md w-1/4">
+            <h1>auth coming soon</h1>
+            <button onClick={handleCloseModal} className='bg-blue-600 text-white px-4 py-1 rounded-full'>dismiss</button>
+            </div>
+            <div className="bg-neutral-800 border border-neutral-700 p-6 rounded-md shadow-md w-1/4 hidden">
+            <h2 className="text-xl mb-4 text-left text-white font-bold ">internhunt <span className="text-blue-500 text-sm">BETA</span></h2>
+
+              <h2 className="text-xl mb-4 text-left text-white">Login</h2>
+              <form>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-white">Email</label>
+                  <input type="email" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-white">Password</label>
+                  <input type="password" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+                </div>
+                <div className="flex justify-end">
+                  <button type="button" onClick={handleCloseModal} className="mr-2 px-4 py-2 bg-neutral-800 rounded">Cancel</button>
+                  <button type="submit" className="px-6  bg-blue-600 border border-blue-700 text-white rounded">Login</button>
+                </div>
+                <br></br>
+                <a href="" className="text-blue-500">Forgot Password?</a><br></br>
+                <a href="" className="text-blue-500">Already have an account?</a>
+
+              </form>
+            </div>
+          </div>
+        )}
 
         <div className="mx-auto px-20 py-10 rounded-md">
           <div>
@@ -102,7 +147,7 @@ export default function Home() {
                         <p className="">{listing.company_name}</p>
                         <p>{listing.locations.join(', ')}</p>
                         <p>{listing.terms.join(', ')}</p>
-                        <a href={listing.url} className="text-blue-500">Apply Here</a>
+                        <a href={listing.url} target="_blank" className="text-blue-500">Apply Here</a>
                       </div>
                     </div>
                     <div className="absolute bottom-0 right-0 text-sm text-gray-500">
